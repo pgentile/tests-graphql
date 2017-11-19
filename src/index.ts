@@ -1,13 +1,20 @@
-namespace Sample {
+import * as express from 'express';
+import * as graphqlHTTP from "express-graphql";
 
-  function printToConsole(text: string) {
-    console.info(text);
-  }
+import * as bodyParser from 'body-parser';
 
-  export function sayHello() {
-    printToConsole(`Hello, ${process.env.USER}`);
-  }
+import schema from './schema';
+import resolvers from './schema/resolvers';
 
-}
 
-Sample.sayHello();
+const app = express();
+app.use('/graphql', graphqlHTTP({
+  schema,
+  rootValue: resolvers,
+  graphiql: true,
+}));
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`GraphQL server running on port ${PORT}.`)
+});

@@ -4,7 +4,7 @@
         "sourceMap": true,
         "module": "commonjs",
         "moduleResolution": "node",
-        "target": "es2016"
+        "target": "es2017"
     },
     "include": [
         "./src/**/*.ts",
