@@ -6,9 +6,11 @@
   "private": true,
   "scripts": {
     "start": "tsc --watch --pretty",
-    "build": "tsc"
+    "build": "tsc",
+    "execute": "node ./build/index.js"
   },
   "devDependencies": {
+    "@types/node": "^8.0.53",
     "typescript": "^2.6.1"
   }
 }
