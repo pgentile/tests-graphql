@@ -1,0 +1,14 @@
+{
+  "name": "tests-graphql",
+  "version": "0.0.1",
+  "description": "Tests avec GraphQL",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "tsc --watch --pretty",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^2.6.1"
+  }
+}
