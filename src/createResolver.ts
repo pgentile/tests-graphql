@@ -13,7 +13,7 @@ export default function createResolver() {
 
   return {
 
-    posts: async () => {
+    async posts() {
       const posts = await getAllPosts();
       return posts.map(post => {
         return {

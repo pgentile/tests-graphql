@@ -10,10 +10,22 @@ const debug = _debug('testsGraphQL');
 
 const app = express();
 app.use('/graphql', graphqlHTTP(() => {
+  const startTime = Date.now();
+
   return {
     schema,
     rootValue: createResolver(),
     graphiql: true,
+
+    extensions() {
+      const endTime = Date.now();
+
+      return {
+        startTime,
+        endTime,
+        runTime: endTime - startTime,
+      };
+    },
   }
 }));
 
