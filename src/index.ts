@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as graphqlHTTP from 'express-graphql';
 import * as _debug from 'debug';
+import * as moment from 'moment';
 
 import schema from './schema';
 import createResolver from './createResolver';
@@ -14,15 +15,16 @@ app.use('/graphql', graphqlHTTP(() => {
 
   return {
     schema,
-    rootValue: createResolver(),
     graphiql: true,
+
+    rootValue: createResolver(),
 
     extensions() {
       const endTime = Date.now();
 
       return {
-        startTime,
-        endTime,
+        startTime: moment(startTime).format("YYYY-MM-DDTHH:mm:ssZ"),
+        endTime: moment(endTime).format("YYYY-MM-DDTHH:mm:ssZ"),
         runTime: endTime - startTime,
       };
     },
