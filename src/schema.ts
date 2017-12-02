@@ -5,6 +5,9 @@ export default buildSchema(`
 
   type Query {
     posts: [Post!]!
+
+    postById(id: ID!): Post!
+
   }
 
   type User {

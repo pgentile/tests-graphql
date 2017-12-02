@@ -10,6 +10,7 @@ const debug = _debug('testsGraphQL');
 
 
 const app = express();
+
 app.use('/graphql', graphqlHTTP(() => {
   const startTime = Date.now();
 
