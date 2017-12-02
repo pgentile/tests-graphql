@@ -1,7 +1,9 @@
 import * as request from "request-promise-native";
-import * as debugLib from "debug";
+import * as _debug from "debug";
 
-const debug = debugLib('schema:resolvers');
+import createDataLoader from './createDataLoader';
+
+const debug = _debug('testsGraphQL:createResolver');
 
 
 async function getAllPosts() {
@@ -34,19 +36,21 @@ async function getUser(userId) {
   });
 }
 
-namespace Resolvers {
+export default function createResolver() {
+  const dataLoader = createDataLoader();
 
-  export async function posts() {
-    const posts = await getAllPosts();
-    return posts.map(post => {
-      return {
-        ...post,
-        comments: async () => getCommentsForPost(post.id),
-        user: async () => getUser(post.userId),
-      };
-    });
-  }
+  return {
 
+    posts: async () => {
+      const posts = await getAllPosts();
+      return posts.map(post => {
+        return {
+          ...post,
+          comments: () => getCommentsForPost(post.id),
+          user: () => dataLoader.users.load(post.userId),
+        };
+      });
+    },
+
+  };
 }
-
-export default Resolvers;
