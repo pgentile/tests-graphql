@@ -2,8 +2,9 @@ import * as request from "request-promise-native";
 import * as _debug from "debug";
 
 import createDataLoader from './createDataLoader';
-import { getAllPosts, getPost } from "./api/posts";
+import { getAllPosts, getPost, addPost } from "./api/posts";
 import { getCommentsForPost } from "./api/comments";
+import { getUser } from "./api/users";
 
 const debug = _debug('testsGraphQL:createResolver');
 
@@ -22,7 +23,16 @@ export default function createResolver() {
     async postById({ id }) {
       const post = await getPost(id);
       return enrichPost(post);
-    }
+    },
+
+    async user({ id }) {
+      return await getUser(id);
+    },
+
+    async addPost({ newPost }) {
+      const post = await addPost(newPost);
+      return enrichPost(post);
+    },
 
   };
 }

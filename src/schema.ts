@@ -4,9 +4,11 @@ import { buildSchema } from "graphql";
 export default buildSchema(`
 
   type Query {
-    posts: [Post!]!
 
+    posts: [Post]!
     postById(id: ID!): Post!
+
+    user(id: ID!): User!
 
   }
 
@@ -23,7 +25,7 @@ export default buildSchema(`
     title: String!
     body: String!
     user: User!
-    comments: [Comment!]!
+    comments: [Comment]!
   }
 
   type Comment {
@@ -31,6 +33,16 @@ export default buildSchema(`
     postId: ID!
     name: String!
     email: String!
+    body: String!
+  }
+
+  type Mutation {
+    addPost(newPost: NewPost!): Post!
+  }
+
+  input NewPost {
+    userId: ID!
+    title: String!
     body: String!
   }
 

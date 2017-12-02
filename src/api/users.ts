@@ -9,11 +9,11 @@ export async function getUsersByIds(ids) {
   return Promise.all(loadedUsers);
 }
 
-async function getUser(userId) {
-  debug('Get user %s', userId);
+export async function getUser(id) {
+  debug('Get user %s', id);
 
   return await request({
-    url: `https://jsonplaceholder.typicode.com/users/${userId}`,
+    url: `https://jsonplaceholder.typicode.com/users/${id}`,
     json: true,
   });
 }
